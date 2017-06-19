@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="theme-color" content= #93b658 >
+    <title>Python2 与 Python3 共存 Windows | Jonas' </title>
+
+    
+        <meta name="keywords" content=","/>
+        
+
+    
+    <meta name="description" content="安装两个版本的Python下载地址：http://python.org/注意勾选添加环境变量Add to Path
+python3作为主要版本的话，只需将python2安装目录下的python.exe 更名为python2.exe即可。"/>
+
+    
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v="/>
+    
+
+    
+
+    
+
+    
+        <link rel="stylesheet" href="/lib/social-share.js/dist/css/share.min.css">
+    
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/materialize/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="/lib/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/css/post/atom-one-light.css">
+    <link rel="stylesheet" href="/css/pteris.css">
+
+
+    
+        <link rel="stylesheet" href="/css/post.css">
+    
+
+    
+        <link rel="stylesheet" href="/lib/lightgallery.js/dist/css/lightgallery.min.css">
+    
+
+    
+</head>
+
+<body>
+
+<header>
+    
+        <div class="header-fixed">
+    <nav class="white lime-text lighten-1 " role="navigation">
+        <div class="nav-wrapper container">
+            <div id="logo-container">
+                <a href="/">
+                    
+                    <span class="brand-logo">Jonas'</span>
+                </a>
+            </div>
+
+            <ul class="right hide-on-med-and-down">
+                
+                    <li><a href="/">Home</a></li>
+                
+                    <li><a href="/archives">Archives</a></li>
+                
+                    <li><a href="https://github.com/jonashao/">Github</a></li>
+                
+                    <li><a href="https://www.linkedin.com/in/haojunnan/">Linkedin</a></li>
+                
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                <i class="fa fa-bars green-text"></i></a>
+        </div>
+    </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+    
+        <li><a href="/">Home</a></li>
+    
+        <li><a href="/archives">Archives</a></li>
+    
+        <li><a href="https://github.com/jonashao/">Github</a></li>
+    
+        <li><a href="https://www.linkedin.com/in/haojunnan/">Linkedin</a></li>
+    
+</ul>
+
+
+
+    
+</header>
+
+<main>
+    
+
+    <div id="post">
+        <div class="container">
+            <div id="post-header" class="center">
+                <h1 class="center">Python2 与 Python3 共存 Windows</h1>
+                <span class="post-date center">
+                    <i class="fa fa-calendar"></i>
+                    <time datetime="2016-10-09T07:00:55.000Z">
+                        2016-10-09
+                    </time>
+                </span>
+
+                
+
+                
+                    <div class="post-gallery">
+                        <div id="lightgallery">
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            <article>
+                <div class="content">
+                    
+    <h1 id="安装两个版本的Python"><a href="#安装两个版本的Python" class="headerlink" title="安装两个版本的Python"></a>安装两个版本的Python</h1><p>下载地址：<a href="http://python.org/" target="_blank" rel="external">http://python.org/</a><br>注意勾选添加环境变量<code>Add to Path</code></p>
+<p>python3作为主要版本的话，只需将python2安装目录下的python.exe 更名为python2.exe即可。</p>
+<a id="more"></a>
+<h1 id="使用两个版本的python"><a href="#使用两个版本的python" class="headerlink" title="使用两个版本的python"></a>使用两个版本的python</h1><p><img src="/images/py2-py3-win/python2_3.png" alt="Alt text"></p>
+<h1 id="使用两个版本的pip"><a href="#使用两个版本的pip" class="headerlink" title="使用两个版本的pip"></a>使用两个版本的pip</h1><p><img src="/images/py2-py3-win/pip2_3.png" alt="Alt text"></p>
+<p>或者更简单的<br><img src="/images/py2-py3-win/pip2_3_s.png" alt="Alt text"></p>
+<p>但使用<code>pip2 --version</code>时可能会遇到问题：</p>
+<blockquote>
+<p>Fatal error in launcher: Unable to create process using ‘“‘</p>
+</blockquote>
+<p><img src="/images/py2-py3-win/pip2_problem.png" alt="Alt text"></p>
+<p>原因是python2的pip收到了损坏。<br>修复的方法很简单：<strong><em>升级pip就好了。</em></strong></p>
+<pre><code>python2 -m pip install -upgrade pip
+</code></pre><p><img src="/images/py2-py3-win/pip2_upgrade.png" alt="Alt text"></p>
+
+
+                </div>
+            </article>
+
+
+            <div class="post-tags center">
+                
+                    <span class="post-tag chip">
+                        <a href="/tags/Python/">Python</a>
+                   </span>
+                
+            </div>
+
+
+            <div class="social-share" data-mobile-sites="weibo,qq,qzone,facebook,twitter">
+                <span id="share-to">Share to</span>
+            </div>
+
+            <div class="post-footer">
+                
+                    <a class="left" href="/2016/11/10/education-concessions/" rel="prev" title="教育优惠大放送">
+                        <i class="fa fa-arrow-circle-left fa-3x" aria-hidden="true"></i>
+                        <span>  教育优惠大放送</span>
+                    </a>
+                
+                
+                    <a class="right" href="/2016/08/08/ssh/" rel="next" title="Intellij 用gradle搭建Spring+Hibernate+Struts2">
+                        Intellij 用gradle搭建Spring+Hibernate+Struts2<i
+                                class="fa fa-arrow-circle-right fa-3x "></i>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+<footer>
+    
+        <footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            <div>© 2017 Copyright Jonas Hao
+                <span class="right">
+                powered by
+                <a href="http://hexo.io">hexo</a>.
+                theme:
+                <a href="https://github.com/jonashao/hexo-theme-pteris">pteris</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="filing">
+            <a href="//www.miitbeian.gov.cn">粤ICP备15089702号-1</a>
+        </div>
+    
+</footer>
+
+    
+</footer>
+
+
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+<script src="/lib/materialize/dist/js/materialize.min.js"></script>
+<script src="/lib/headroom.js/dist/headroom.min.js"></script>
+<script src="/lib/headroom.js/dist/jQuery.headroom.min.js"></script>
+
+
+
+    <script src="/lib/social-share.js/dist/js/share.min.js"></script>
+
+
+
+<script src="/js/pteris.js"></script>
+
+
+    <script src="/lib/lightgallery.js/dist/js/lightgallery.min.js"></script>
+
+
+
+
+
+    <script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+
+
+
+</body>
+</html>

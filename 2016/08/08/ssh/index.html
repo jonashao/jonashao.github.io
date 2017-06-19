@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="theme-color" content= #93b658 >
+    <title>Intellij 用gradle搭建Spring+Hibernate+Struts2 | Jonas' </title>
+
+    
+        <meta name="keywords" content="pteris, 郝俊楠, Koche, JunnanHao, HaoJunnan, Junnan"/>
+        
+
+    
+    <meta name="description" content="新建项目File -&gt; New -&gt; Project"/>
+
+    
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v="/>
+    
+
+    
+
+    
+
+    
+        <link rel="stylesheet" href="/lib/social-share.js/dist/css/share.min.css">
+    
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/materialize/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="/lib/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/css/post/atom-one-light.css">
+    <link rel="stylesheet" href="/css/pteris.css">
+
+
+    
+        <link rel="stylesheet" href="/css/post.css">
+    
+
+    
+        <link rel="stylesheet" href="/lib/lightgallery.js/dist/css/lightgallery.min.css">
+    
+
+    
+</head>
+
+<body>
+
+<header>
+    
+        <div class="header-fixed">
+    <nav class="white lime-text lighten-1 " role="navigation">
+        <div class="nav-wrapper container">
+            <div id="logo-container">
+                <a href="/">
+                    
+                    <span class="brand-logo">Jonas'</span>
+                </a>
+            </div>
+
+            <ul class="right hide-on-med-and-down">
+                
+                    <li><a href="/">Home</a></li>
+                
+                    <li><a href="/archives">Archives</a></li>
+                
+                    <li><a href="https://github.com/jonashao/">Github</a></li>
+                
+                    <li><a href="https://www.linkedin.com/in/haojunnan/">Linkedin</a></li>
+                
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                <i class="fa fa-bars green-text"></i></a>
+        </div>
+    </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+    
+        <li><a href="/">Home</a></li>
+    
+        <li><a href="/archives">Archives</a></li>
+    
+        <li><a href="https://github.com/jonashao/">Github</a></li>
+    
+        <li><a href="https://www.linkedin.com/in/haojunnan/">Linkedin</a></li>
+    
+</ul>
+
+
+
+    
+</header>
+
+<main>
+    
+
+    <div id="post">
+        <div class="container">
+            <div id="post-header" class="center">
+                <h1 class="center">Intellij 用gradle搭建Spring+Hibernate+Struts2</h1>
+                <span class="post-date center">
+                    <i class="fa fa-calendar"></i>
+                    <time datetime="2016-08-08T14:46:55.000Z">
+                        2016-08-08
+                    </time>
+                </span>
+
+                
+
+                
+                    <div class="post-gallery">
+                        <div id="lightgallery">
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            <article>
+                <div class="content">
+                    
+    <h1 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h1><p>File -&gt; New -&gt; Project</p>
+<a id="more"></a>
+<p>左侧选择Gradle,<br>Project SDK配置成JDK的目录。<br>Additional Libraries and Frameworks中勾选Java和Web，点击Next<br><img src="/images/1-New-Project.png" alt=""></p>
+<p>进入gradle配置页面，groupID填写组织域名。<br>ArtifectId填写项目的名称。点击Next-Next<br><img src="/images/2-New-Project-Gradle.png" alt=""></p>
+<p>选择项目目录，然后Finish。</p>
+<h1 id="配置Gradle文件"><a href="#配置Gradle文件" class="headerlink" title="配置Gradle文件"></a>配置Gradle文件</h1><p>第一次打开项目，可能会需要一段时间更新gradle版本，请耐心等候完成。<br><img src="/images/4-Refresh-Gradle.png" alt=""></p>
+<p>更新gradle完成之后，修改 <code>build.gradle</code>，<br>这是我的，包含了spring、java ee、 struts2 、 hibernate、 jdbc的依赖：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">group</span> <span class="string">'com.junnanhao'</span></div><div class="line">version <span class="string">'1.0-SNAPSHOT'</span></div><div class="line"></div><div class="line">apply plugin: <span class="string">'java'</span></div><div class="line">apply plugin: <span class="string">'spring-boot'</span></div><div class="line"></div><div class="line"><span class="keyword">sourceCompatibility</span> = <span class="number">1.8</span></div><div class="line"><span class="keyword">targetCompatibility</span> = <span class="number">1.8</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">repositories</span> &#123;</div><div class="line">    mavenCentral()</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">buildscript</span> &#123;</div><div class="line">    ext &#123;</div><div class="line">        springBootVersion = <span class="string">'1.3.3.RELEASE'</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">repositories</span> &#123;</div><div class="line">        mavenCentral()</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">dependencies</span> &#123;</div><div class="line">        <span class="keyword">classpath</span>(<span class="string">"org.springframework.boot:spring-boot-gradle-plugin:$&#123;springBootVersion&#125;"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">    <span class="comment">// 将libs 文件夹中的jar 全部打包进工程</span></div><div class="line">    <span class="keyword">compile</span> <span class="keyword">fileTree</span>(dir: <span class="string">'libs'</span>, <span class="keyword">include</span>: [<span class="string">'*.jar'</span>])</div><div class="line"></div><div class="line">    testCompile <span class="keyword">group</span>: <span class="string">'junit'</span>, name: <span class="string">'junit'</span>, version: <span class="string">'4.11'</span></div><div class="line"></div><div class="line">    <span class="comment">// spring</span></div><div class="line">    testCompile(<span class="string">'org.springframework.boot:spring-boot-starter-test'</span>)</div><div class="line">    <span class="keyword">compile</span>(<span class="string">"org.springframework.boot:spring-boot-starter-web"</span>)</div><div class="line">    <span class="keyword">compile</span>(<span class="string">'org.springframework.boot:spring-boot-starter'</span>)</div><div class="line">    <span class="keyword">compile</span>(<span class="string">'org.springframework:spring-orm'</span>)</div><div class="line"></div><div class="line">    <span class="comment">// compile java ee 7</span></div><div class="line">    <span class="keyword">compile</span>(<span class="string">'javax:javaee-api:7.0'</span>)</div><div class="line"></div><div class="line">    <span class="comment">// struts</span></div><div class="line">    <span class="keyword">compile</span>(<span class="string">'org.apache.struts:struts2-core:2.3.28'</span>)</div><div class="line">    <span class="keyword">compile</span>(<span class="string">'org.apache.struts:struts2-spring-plugin:2.3.28'</span>)</div><div class="line">    <span class="keyword">compile</span>(<span class="string">'org.apache.struts:struts2-convention-plugin:2.3.28'</span>)</div><div class="line"></div><div class="line">    <span class="comment">// hibernate</span></div><div class="line">    <span class="keyword">compile</span> (<span class="string">'org.hibernate:hibernate-core:5.1.0.Final'</span>)</div><div class="line"></div><div class="line">    <span class="comment">// jdbc</span></div><div class="line">    <span class="keyword">compile</span>(<span class="string">'mysql:mysql-connector-java:5.1.6'</span>)</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Refresh gradle, Intellij会自动检测到gradle内容的变动，并询问是否要refresh,<br>如果没有检测到，点击窗口右侧的gradle, 一个回收的标志就是 Refresh，如图：</p>
+<p><img src="/images/5-Button-Refresh-Gradle.png" alt=""></p>
+<p>此时，Intllij自动从maven下载缺失的依赖项。<br>这将是漫长的过程，因为要下载Spring、Struts2、Hibernate以及 Java ee的库文件 (如果之前没有下载过的话）。</p>
+<h1 id="配置项目"><a href="#配置项目" class="headerlink" title="配置项目"></a>配置项目</h1><p>至此，我们已经为项目做好了充分准备，所有sdk都已就绪，现在开始配置项目的框架。</p>
+<h2 id="添加SSH框架"><a href="#添加SSH框架" class="headerlink" title="添加SSH框架"></a>添加SSH框架</h2><p>在demo/src/main上点击鼠标右键，点击Add Framework Support:<br><img src="/images/6-Add-Framework-Support.png" alt=""></p>
+<p>在左侧依次选择Struts2、 Spring MVC 和 Hibernate：<br><img src="/images/7-Add-Struts2.png" alt=""><br><img src="/images/7-Add-Spring-Hibernate.png" alt=""></p>
+<p>此时Intellij会检测到新的框架，并提醒配置。<br>我们不需要修改默认配置，不过可以点进去看一看。<br>如果没有提醒也没关系，在File -&gt; Project Settings（快捷键：<code>Ctrl+Alt+Shift+S</code>)<br><img src="/images/8-config-struts2.png" alt=""></p>
+<p>现在的目录是这样子的：</p>
+<p><img src="/images/9-files.png" alt=""></p>
+<p>默认的配置都已经是OK的了, 唯一要做的是将Hibernate集成到Spring中。</p>
+<h2 id="配置Hibernate"><a href="#配置Hibernate" class="headerlink" title="配置Hibernate"></a>配置Hibernate</h2><p>首先配置<code>hibernate.cfg.xml</code>:<br>根据你的电脑的情况设置以下项:</p>
+<ul>
+<li>connection.url</li>
+<li>connection.driver_class</li>
+<li>connection.username</li>
+<li>connection.password</li>
+<li>dialect</li>
+<li>current_session_context_class</li>
+</ul>
+<p>下面是我的配置,可供参考。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version='1.0' encoding='utf-8'?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE hibernate-configuration PUBLIC</span></div><div class="line">        "-//Hibernate/Hibernate Configuration DTD//EN"</div><div class="line">        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"&gt;</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">hibernate-configuration</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></div><div class="line">        <span class="comment">&lt;!-- Database connection settings --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"connection.driver_class"</span>&gt;</span>com.mysql.jdbc.Driver<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"connection.url"</span>&gt;</span>jdbc:mysql://localhost:3306/demo<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"connection.username"</span>&gt;</span>******<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"connection.password"</span>&gt;</span>******<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- JDBC connection pool (use the built-in) --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"connection.pool_size"</span>&gt;</span>10<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- SQL dialect --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dialect"</span>&gt;</span>org.hibernate.dialect.MySQLDialect<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- Enable Hibernate's automatic session context management --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"current_session_context_class"</span>&gt;</span>thread<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- Echo all executed SQL to stdout --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"show_sql"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"format_sql"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="comment">&lt;!-- Drop and re-create the database schema on startup --&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"hbm2ddl.auto"</span>&gt;</span>update<span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">hibernate-configuration</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在Spring的配置文件<code>applicationContext.xml</code>中加入sessionFactory这一bean.<br>这样Spring会为所有依赖于id为sessionFactory的bean注入依赖 （通过调用那些类的<code>setSessionFactory()</code>方法。）<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sessionFactory"</span> <span class="attr">class</span>=<span class="string">"org.springframework.orm.hibernate5.LocalSessionFactoryBean"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"configLocations"</span> <span class="attr">value</span>=<span class="string">"classpath:hibernate.cfg.xml"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>重启一下项目，新打开时，Intellij会提醒检测到Hibernate的数据源，点击Discover and setup：<br><img src="/images/15-hibernate-detect.png" alt=""></p>
+<h2 id="配置Tomcat服务器"><a href="#配置Tomcat服务器" class="headerlink" title="配置Tomcat服务器"></a>配置Tomcat服务器</h2><ol>
+<li><p>Edit Configurations<br><img src="/images/12-tomcat-1.png" alt=""></p>
+</li>
+<li><p>Add new configuration - tomcat server - Local<br><img src="/images/12-tomcat-2.png" alt=""></p>
+</li>
+<li><p>Configure Application server， 选择Tomcat SDK Home目录<br><img src="/images/12-tomcat-3.png" alt=""></p>
+</li>
+<li><p>Deployment - 点击加号 - Artifact - 选择默认的Artifact<br><img src="/images/12-tomcat-4.png" alt=""></p>
+</li>
+<li><p>点击铅笔的图标， 编辑Artifact（也可以在Project Settings的右侧找到Artifact)<br><img src="/images/12-tomcat-5.png" alt=""></p>
+</li>
+<li><p>将demo_main模块添加到artifact, 做法是：右键在demo_main上，点击Put into Ouput Root。 demo是我的项目名字。<br><img src="/images/12-tomcat-6.png" alt=""></p>
+</li>
+<li><p>添加xml文件到artifact，hibernate.cfg.xml和struts.xml（所有xml文件都）默认情况不会被自动添加到build结果中，需要手动配置：<br>点击加号 - File, 选择两个xml文件<br><img src="/images/12-tomcat-7.png" alt=""><br><img src="/images/12-tomcat-8.png" alt=""></p>
+</li>
+</ol>
+<p>OK!</p>
+<p>现在，整个配置都已经完成了。<br>点击tomcat猫旁边的绿色三角形运行一下！<br><img src="/images/14-run.png" alt=""></p>
+<p>看到这样的结果：</p>
+<p><img src="/images/14-run-2.png" alt=""></p>
+<p>就说明tomcat配置成功了，这是index.jsp的页面，默认的欢迎页。</p>
+<p>下面是一个用户注册的例子。</p>
+<h1 id="用户注册的例子"><a href="#用户注册的例子" class="headerlink" title="用户注册的例子"></a>用户注册的例子</h1><h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p>网页上有一个表单，用户可以填入ID、密码、重复输入的密码、手机号码和邮箱，其中只有邮箱是选填的。<br>后台先校验数据，校验失败给用户相应的提醒，校验成功之后查询数据库，判断这个ID是否已经被注册，如果没有则创建一个用户，并永久保存到数据库中，否则提示用户这个ID已经被占用。</p>
+<h2 id="自顶向下设计"><a href="#自顶向下设计" class="headerlink" title="自顶向下设计"></a>自顶向下设计</h2><h3 id="1-signUp-jsp"><a href="#1-signUp-jsp" class="headerlink" title="1. signUp.jsp"></a>1. signUp.jsp</h3><p>注册信息的表单，提交之后指向<code>SignUpAction</code></p>
+<h3 id="2-UserAction-java"><a href="#2-UserAction-java" class="headerlink" title="2. UserAction.java"></a>2. UserAction.java</h3><p>因为除了注册，用户还需要登录，我们将登录注册的action都放在UserAction.java中，只需在<code>struts.xml</code>中为每个action指定各自的方法。</p>
+<p>SignUpAction指向UserAction中的<code>public String signUp()</code>方法。<br>在<code>signUp()</code>中，先做表单校验：<br>用户名的长度、包含字符，密码的长度、特殊字符，两次输入密码是否一致，手机号码格式以及邮箱格式。<br>记录校验不通过的字段以及原因，为之后提醒用户。</p>
+<p>校验成功之后通过UserDao根据ID查询用户，查到用户不为空则表示ID被占用，查询为空则创建一个User对象，并通过UserDao保存User到数据库。</p>
+<h3 id="3-UserDao-java"><a href="#3-UserDao-java" class="headerlink" title="3. UserDao.java"></a>3. UserDao.java</h3><p>暂时需要实现两个方法：<br><code>User findUserByID(String ID)</code><br><code>void addUser(User user)</code></p>
+<h2 id="自底向上实现"><a href="#自底向上实现" class="headerlink" title="自底向上实现"></a>自底向上实现</h2><p>首先在demo/src/main/java 下创建几个包：</p>
+<ul>
+<li>/action</li>
+<li>/dao</li>
+<li>/po</li>
+<li>/service</li>
+</ul>
+<h3 id="User-java"><a href="#User-java" class="headerlink" title="User.java"></a>User.java</h3><p>在/po下创建一个POJO（Pure Old Java Object)类：User.java.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String ID;</div><div class="line">    <span class="keyword">private</span> String phone;</div><div class="line">    <span class="keyword">private</span> String email;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">long</span> password;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后充分利用Intellij的便捷。鼠标在password;后点一下，让焦点在User类内。<br>按快捷键<code>Alt + Insert</code>,或者鼠标右键-Generate…</p>
+<p><img src="/images/10-generate-getter-and-setter.png" alt=""></p>
+<p>点Getter and Setter，然后全选，点击OK。</p>
+<p>再用<code>Alt + Insert</code>，点Constructor，分别创建一个没有参数的构造函数和一个传入ID、密码、手机号的构造函数（邮箱在这里是选填的）。</p>
+<p>接下来将User类标记为Hibernate的实体（@Entity),</p>
+<p>并在getID()上标记ID为实体User的主键（@Id)</p>
+<p>最后，User.java是这样：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> po;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.persistence.Entity;</div><div class="line"><span class="keyword">import</span> javax.persistence.Id;</div><div class="line"></div><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String ID;</div><div class="line">    <span class="keyword">private</span> String phone;</div><div class="line">    <span class="keyword">private</span> String email;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">long</span> password;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(String ID, String phone, <span class="keyword">long</span> password)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.ID = ID;</div><div class="line">        <span class="keyword">this</span>.phone = phone;</div><div class="line">        <span class="keyword">this</span>.password = password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Id</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getID</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> ID;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setID</span><span class="params">(String ID)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.ID = ID;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPhone</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> phone;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPhone</span><span class="params">(String phone)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.phone = phone;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getEmail</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> email;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEmail</span><span class="params">(String email)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.email = email;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(<span class="keyword">long</span> password)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.password = password;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>更多标记请参考<a href="http://docs.jboss.org/hibernate/orm/5.1/quickstart/html_single/#tutorial_annotations" target="_blank" rel="external">Hibernate官方文档</a></p>
+<p>写完User.java之后，把它配置到<code>Hibernate.cfg.xml</code>中。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">session-factory</span>&gt;</span></div><div class="line">       ...</div><div class="line">       <span class="tag">&lt;<span class="name">mapping</span> <span class="attr">class</span>=<span class="string">"po.User"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">session-factory</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="UserDao-java"><a href="#UserDao-java" class="headerlink" title="UserDao.java"></a>UserDao.java</h3><p>用Hibernate的sessionFactory创建一次会话，创建方式有两种</p>
+<ol>
+<li><code>sessionFactory.openSession();</code></li>
+<li><code>sessionFactory.getCurrentSession()</code></li>
+</ol>
+<p>第一种创建了一个新的会话，需要手动flush、commit transaction、 close session.<br>适合于每次请求一次会话的情况。</p>
+<p>第二种获取当前线程的会话，不需要手动关闭，会被自动处理。<br>适合于长会话。</p>
+<p>这里用到了Hibernate Query Language， 跟Sql十分相像，但注意From子句后跟的不是表名，而是对应实体类的名字。<br>更多有关HQL请参考<a href="http://www.tutorialspoint.com/hibernate/hibernate_query_language.htm" target="_blank" rel="external">Hibernate - Query Language</a>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> dao;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.hibernate.Session;</div><div class="line"><span class="keyword">import</span> org.hibernate.SessionFactory;</div><div class="line"><span class="keyword">import</span> org.hibernate.Transaction;</div><div class="line"><span class="keyword">import</span> po.User;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserDao</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> SessionFactory sessionFactory;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">addUser</span><span class="params">(User user)</span> </span>&#123;</div><div class="line">        Session session = sessionFactory.openSession();</div><div class="line">        Transaction transaction = session.beginTransaction();</div><div class="line">        session.save(user);</div><div class="line">        transaction.commit();</div><div class="line">        session.flush();</div><div class="line">        session.close();</div><div class="line">        <span class="keyword">return</span> <span class="string">"ok"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">findUserByID</span><span class="params">(String ID)</span> </span>&#123;</div><div class="line">        sessionFactory.getCurrentSession().beginTransaction();</div><div class="line"></div><div class="line">        List list = sessionFactory.getCurrentSession().</div><div class="line">                createQuery(<span class="string">"from User where ID = ?"</span>).</div><div class="line">                setParameter(<span class="number">0</span>, ID).list();</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (list.size()&gt;<span class="number">0</span>) &#123;</div><div class="line">            Object object = list.get(<span class="number">0</span>);</div><div class="line">            System.out.println(object);</div><div class="line">            <span class="keyword">return</span> (User) object;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSessionFactory</span><span class="params">(SessionFactory sessionFactory)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.sessionFactory = sessionFactory;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>查询数据用到<code>sessionFactory</code>，它是从哪里获取的呢？</p>
+<p>Spring在这里发挥作用了，它帮助我们注入这些依赖，只需要告诉Spring：UserDao要用到sessionFactory，那么Spring会在初始化的时候，为所有用到sessionFactory的类通过<code>setSessionFactory()</code>注入sessionFactory的一个实例。</p>
+<p>做法也很简单，用Intellij的Generate（<code>ALT + Insert</code>)-Spring Setter Dependency<br><img src="/images/11-spring-dependency.png" alt=""></p>
+<p>选择sessionFactory.（没错，这就是我们在整合Hibernate进Spring的时候创建的bean)<br><img src="/images/11-spring-dependency-sessionFactory.png" alt=""></p>
+<p>以上Generate的过程，相当于Intellij帮我们在<code>applicationContext.xml</code>中加入了一个bean：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"</span>&gt;</div><div class="line"></div><div class="line">    <span class="comment">&lt;!--将Hibernate整合进Spring--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sessionFactory"</span> <span class="attr">class</span>=<span class="string">"org.springframework.orm.hibernate5.LocalSessionFactoryBean"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"configLocations"</span> <span class="attr">value</span>=<span class="string">"classpath:hibernate.cfg.xml"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">    </div><div class="line">    <span class="comment">&lt;!--以下是Generate自动生成的代码--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"dao.UserDao"</span> <span class="attr">id</span>=<span class="string">"userDao"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sessionFactory"</span> <span class="attr">ref</span>=<span class="string">"sessionFactory"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">    </div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="UserAction-java"><a href="#UserAction-java" class="headerlink" title="UserAction.java"></a>UserAction.java</h3><p>代码的主要结构：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> action;</div><div class="line"></div><div class="line"><span class="keyword">import</span> dao.UserDao;</div><div class="line"><span class="keyword">import</span> org.apache.struts2.dispatcher.DefaultActionSupport;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserAction</span> <span class="keyword">extends</span> <span class="title">DefaultActionSupport</span> </span>&#123;</div><div class="line"></div><div class="line">    </div><div class="line">    <span class="keyword">private</span> String username;</div><div class="line">    <span class="keyword">private</span> String password;</div><div class="line">    <span class="keyword">private</span> String passwordAgain;</div><div class="line">    <span class="keyword">private</span> String phone;</div><div class="line">    <span class="keyword">private</span> String email;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> UserDao userDao;</div><div class="line"></div><div class="line">    UserAction() &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">singUp</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">return</span> INPUT;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 校验用户名</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">validateUsername</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 校验密码，只能包含数字、字母、下划线、符号，长度为6-20位</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">validatePassword</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后用Generate(<code>Alt + Insert</code>)生成Getter 和 Setter, 以及userDao的Spring Setter Dependency.</p>
+<p>getter和setter函数使Action与jsp直接交互数据，也就是说，jsp表单里的表单项与一个私有成员（ID,password,phone,email)绑定之后，会自动调用setter方法。</p>
+<p>Spring Setter 为我们注入UserDao。</p>
+<p>这是一份完整的UserAction.java代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> action;</div><div class="line"></div><div class="line"><span class="keyword">import</span> dao.UserDao;</div><div class="line"><span class="keyword">import</span> org.apache.struts2.dispatcher.DefaultActionSupport;</div><div class="line"><span class="keyword">import</span> po.User;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserAction</span> <span class="keyword">extends</span> <span class="title">DefaultActionSupport</span> </span>&#123;</div><div class="line"></div><div class="line">    </div><div class="line">    <span class="keyword">private</span> String username;</div><div class="line">    <span class="keyword">private</span> String password;</div><div class="line">    <span class="keyword">private</span> String passwordAgain;</div><div class="line">    <span class="keyword">private</span> String phone;</div><div class="line">    <span class="keyword">private</span> String email;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> UserDao userDao;</div><div class="line"></div><div class="line">    UserAction() &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">singUp</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        <span class="keyword">if</span> (validateUsername() &amp;&amp; validatePassword()) &#123;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (!password.equals(passwordAgain)) &#123;</div><div class="line">                addFieldError(<span class="string">"passwordAgain"</span>, <span class="string">"两次密码输入不一致"</span>);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            User user = userDao.findUserByID(username);</div><div class="line">            <span class="keyword">if</span> (user != <span class="keyword">null</span>) &#123;</div><div class="line">                addFieldError(<span class="string">"username"</span>, <span class="string">"用户名已经被占用"</span>);</div><div class="line">                <span class="keyword">return</span> INPUT;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            user = <span class="keyword">new</span> User(phone,username, password.hashCode());</div><div class="line"></div><div class="line">            userDao.addUser(user);</div><div class="line">            <span class="keyword">return</span> SUCCESS;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> INPUT;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 校验用户名</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">validateUsername</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (username != <span class="keyword">null</span> &amp;&amp; username.matches(<span class="string">"^[a-z0-9_-]&#123;3,15&#125;$"</span>)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        addFieldError(<span class="string">"username"</span>, <span class="string">"用户名不符合规范"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 校验密码，只能包含数字、字母、下划线、符号，长度为6-20位</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">validatePassword</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (!password.isEmpty() &amp;&amp; password.matches(<span class="string">"[0-9a-zA-Z!@#$%^?,./]&#123;6,20&#125;"</span>)) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        addFieldError(<span class="string">"password"</span>, <span class="string">"密码不符合规范"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUsername</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> username;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUsername</span><span class="params">(String username)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.username = username;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPassword</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPassword</span><span class="params">(String password)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.password = password;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPasswordAgain</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> passwordAgain;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPasswordAgain</span><span class="params">(String passwordAgain)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.passwordAgain = passwordAgain;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPhone</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> phone;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPhone</span><span class="params">(String phone)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.phone = phone;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getEmail</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> email;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEmail</span><span class="params">(String email)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.email = email;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserDao</span><span class="params">(UserDao userDao)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.userDao = userDao;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p><code>addFieldError(feildName, errorMessage)</code><br>记录的错误信息，将会在返回结果为INPUT之后，呈现在jsp中，效果如图：</p>
+<p><img src="/images/13-validate-2.png" alt=""></p>
+</blockquote>
+<h3 id="struts-xml"><a href="#struts-xml" class="headerlink" title="struts.xml"></a>struts.xml</h3><p>接下来，我们在struts.xml中注册UserAction:<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"></div><div class="line"><span class="meta">&lt;!DOCTYPE struts PUBLIC</span></div><div class="line">        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"</div><div class="line">        "http://struts.apache.org/dtds/struts-2.3.dtd"&gt;</div><div class="line"><span class="tag">&lt;<span class="name">struts</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">"default"</span> <span class="attr">namespace</span>=<span class="string">"/"</span> <span class="attr">extends</span>=<span class="string">"struts-default"</span>&gt;</span></div><div class="line">        </div><div class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">name</span>=<span class="string">"signUp"</span> <span class="attr">class</span>=<span class="string">"action.UserAction"</span> <span class="attr">method</span>=<span class="string">"singUp"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"input"</span>&gt;</span>index.jsp<span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">result</span> <span class="attr">name</span>=<span class="string">"success"</span>&gt;</span>welcome.jsp <span class="tag">&lt;/<span class="name">result</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">action</span>&gt;</span></div><div class="line">        </div><div class="line">    <span class="tag">&lt;/<span class="name">package</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">struts</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="index-jsp"><a href="#index-jsp" class="headerlink" title="index.jsp"></a>index.jsp</h3><p>最后在jsp中添加一个表单，（index.jsp是默认的欢迎页。）</p>
+<p>不要忘了在头部引入struts的标签库，</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%@</span> <span class="attr">taglib</span> <span class="attr">prefix</span>=<span class="string">"s"</span> <span class="attr">uri</span>=<span class="string">"/struts-tags"</span> %&gt;</span></div><div class="line"></div><div class="line"> <span class="tag">&lt;<span class="name">s:form</span> <span class="attr">action</span>=<span class="string">"signUp"</span> <span class="attr">validate</span>=<span class="string">"true"</span> &gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">s:textfield</span> <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">label</span>=<span class="string">"用户名"</span> <span class="attr">maxLength</span>=<span class="string">"20"</span> <span class="attr">required</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">s:password</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">label</span>=<span class="string">"密码"</span> <span class="attr">maxLength</span>=<span class="string">"16"</span> <span class="attr">required</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">s:password</span> <span class="attr">name</span>=<span class="string">"passwordAgain"</span> <span class="attr">label</span>=<span class="string">"确认密码"</span> <span class="attr">maxLength</span>=<span class="string">"16"</span> <span class="attr">required</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">s:textfield</span> <span class="attr">name</span>=<span class="string">"phone"</span> <span class="attr">label</span>=<span class="string">"电话"</span> <span class="attr">maxLength</span>=<span class="string">"15"</span> <span class="attr">required</span>=<span class="string">"true"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">s:textfield</span> <span class="attr">name</span>=<span class="string">"email"</span> <span class="attr">label</span>=<span class="string">"电子邮箱"</span>/&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">s:submit</span> <span class="attr">value</span>=<span class="string">"注册"</span>/&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">s:form</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><code>name</code>属性绑定action的一个私有成员，提交表单之后将自动调用对应setter函数。</p>
+<h3 id="welcome-jsp"><a href="#welcome-jsp" class="headerlink" title="welcome.jsp"></a>welcome.jsp</h3><p>新建一个jsp页面，注册成功后将跳转到这个页面。</p>
+<p>最后，运行Tomcat：</p>
+<p><img src="/images/16-demo.png" alt=""></p>
+<p>填写表单之后：<br><img src="/images/16-demo-2.png" alt=""></p>
+<p>刷新一下数据库，可以看到新的记录已经插入：<br><img src="/images/16-demo-3.png" alt=""></p>
+<p>至此，简单的用户注册的例子已经完成，欢迎大家指正提建议。</p>
+<p>项目例子</p>
+
+
+                </div>
+            </article>
+
+
+            <div class="post-tags center">
+                
+            </div>
+
+
+            <div class="social-share" data-mobile-sites="weibo,qq,qzone,facebook,twitter">
+                <span id="share-to">Share to</span>
+            </div>
+
+            <div class="post-footer">
+                
+                    <a class="left" href="/2016/10/09/py2-py3-win/" rel="prev" title="Python2 与 Python3 共存 Windows">
+                        <i class="fa fa-arrow-circle-left fa-3x" aria-hidden="true"></i>
+                        <span>  Python2 与 Python3 共存 Windows</span>
+                    </a>
+                
+                
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+<footer>
+    
+        <footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            <div>© 2017 Copyright Jonas Hao
+                <span class="right">
+                powered by
+                <a href="http://hexo.io">hexo</a>.
+                theme:
+                <a href="https://github.com/jonashao/hexo-theme-pteris">pteris</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="filing">
+            <a href="//www.miitbeian.gov.cn">粤ICP备15089702号-1</a>
+        </div>
+    
+</footer>
+
+    
+</footer>
+
+
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+<script src="/lib/materialize/dist/js/materialize.min.js"></script>
+<script src="/lib/headroom.js/dist/headroom.min.js"></script>
+<script src="/lib/headroom.js/dist/jQuery.headroom.min.js"></script>
+
+
+
+    <script src="/lib/social-share.js/dist/js/share.min.js"></script>
+
+
+
+<script src="/js/pteris.js"></script>
+
+
+    <script src="/lib/lightgallery.js/dist/js/lightgallery.min.js"></script>
+
+
+
+
+
+    <script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+
+
+
+</body>
+</html>

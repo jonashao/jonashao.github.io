@@ -1,0 +1,89 @@
+<p align='center'><br>  <img src='http://briangonzalez.github.io/jquery.adaptive-backgrounds.js/favicon.png?2'><br></p>
+
+<h2 id="jquery-adaptive-backgrounds-js"><a href="#jquery-adaptive-backgrounds-js" class="headerlink" title="jquery.adaptive-backgrounds.js"></a>jquery.adaptive-backgrounds.js</h2><p><em>A simple jQuery plugin to extract the dominant color of an image and apply it to the background of its parent element.</em></p>
+<p><strong><a href="http://briangonzalez.github.io/jquery.adaptive-backgrounds.js/">Check it out on the web!</a></strong></p>
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><p>Simply include jQuery and the script in your page, then run the it like so:</p>
+<pre><code class="javascript">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+  $.adaptiveBackground.run()
+});
+</code></pre>
+<p>The script looks for image(s) with the <code>data-adaptive-background</code> attribute:</p>
+<pre><code class="html"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"/image.jpg"</span> <span class="attr">data-adaptive-background</span>&gt;</span>
+</code></pre>
+<h3 id="Using-an-element-with-a-CSS-background-image"><a href="#Using-an-element-with-a-CSS-background-image" class="headerlink" title="Using an element with a CSS background image"></a>Using an element with a CSS background image</h3><p>Instead of using an <code>&lt;img&gt;</code> element nested inside of parent element, AB supports grabbing the dominant color of a background image of a standalone element, then applying the corresponding dominant color as the background color of said element.</p>
+<p>Enable this functionality by adding a data property, <code>data-ab-css-background</code> to the element. See the example below:</p>
+<pre><code class="html"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">'background-image: url(/some-image.jpg)'</span> <span class="attr">data-adaptive-background</span> <span class="attr">data-ab-css-background</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>
+</code></pre>
+<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p>Here’s a little demo of how it works. (1) The page loads (2) the dominant background color of the image is extracted (3) said color is applied to parent of image. <em>Demo drastically slowed down to show effect</em>.</p>
+<hr>
+<p><img src="https://raw.github.com/briangonzalez/jquery.adaptive-background.js/master/misc/ab.gif"></p>
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><p>This plugin exposes one method:</p>
+<ul>
+<li><strong>$.adaptiveBackground.run(opts)</strong> <em>arg: opts (Object)</em> an optional argument to be merged in with the defaults.</li>
+</ul>
+<h2 id="Default-Options"><a href="#Default-Options" class="headerlink" title="Default Options"></a>Default Options</h2><ul>
+<li><strong>selector</strong> String <em>(default: <code>&#39;img[data-adaptive-background=&quot;1&quot;]&#39;</code>)</em> a CSS selector which denotes which images to grab/process. Ideally, this selector would start with <em>img</em>, to ensure we only grab and try to process actual images.</li>
+<li><strong>parent</strong> falsy <em>(default: <code>null</code>)</em> a CSS selector which denotes which parent to apply the background color to. By default, the color is applied to the parent one level up the DOM tree.</li>
+<li><strong>normalizeTextColor</strong> boolean <em>(default: <code>false</code>)</em> option to normalize the color of the parent text if background color is too dark or too light</li>
+<li><strong>normalizedTextColors</strong> Object Literal <em>(default: <code>{dark: &#39;#000&#39;, light: &#39;#fff&#39;}</code>)</em> text colors used when background is either too dark/light</li>
+</ul>
+<p><strong>Example:</strong><br>Call the <code>run</code> method, passing in any options you’d like to override.</p>
+<pre><code class="javascript"><span class="keyword">var</span> defaults      = {
+  <span class="attr">selector</span>:             <span class="string">'[data-adaptive-background="1"]'</span>,
+  <span class="attr">parent</span>:               <span class="literal">null</span>,
+  <span class="attr">exclude</span>:              [ <span class="string">'rgb(0,0,0)'</span>, <span class="string">'rgba(255,255,255)'</span> ],
+  <span class="attr">normalizeTextColor</span>:   <span class="literal">false</span>,
+  <span class="attr">normalizedTextColors</span>:  {
+    <span class="attr">light</span>:      <span class="string">"#fff"</span>,
+    <span class="attr">dark</span>:       <span class="string">"#000"</span>
+  },
+  <span class="attr">lumaClasses</span>:  {
+    <span class="attr">light</span>:      <span class="string">"ab-light"</span>,
+    <span class="attr">dark</span>:       <span class="string">"ab-dark"</span>
+  }
+};
+$.adaptiveBackground.run(defaults)
+</code></pre>
+<h2 id="Events-Emitted"><a href="#Events-Emitted" class="headerlink" title="Events Emitted"></a>Events Emitted</h2><ul>
+<li><strong>ab-color-found</strong> <a href="http://api.jquery.com/category/events/event-object/">Event</a> This event is fired when the dominant color of the image is found. The payload includes the dominant color as well as the color palette contained in the image.</li>
+</ul>
+<p><strong>Example:</strong><br>Bind to the <code>ab-color-found</code> event like so:</p>
+<pre><code class="javascript">$(<span class="string">'img.my-image'</span>).on(<span class="string">'ab-color-found'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">ev,payload</span>)</span>{
+  <span class="built_in">console</span>.log(payload.color);   <span class="comment">// The dominant color in the image.</span>
+  <span class="built_in">console</span>.log(payload.palette); <span class="comment">// The color palette found in the image.</span>
+  <span class="built_in">console</span>.log(ev);   <span class="comment">// The jQuery.Event object</span>
+});
+</code></pre>
+<h2 id="Success-Callback"><a href="#Success-Callback" class="headerlink" title="Success Callback"></a>Success Callback</h2><p>You may wish to supply a callback function which is called once the magic has been performed.</p>
+<pre><code class="javascript">$.adaptiveBackground.run({
+  <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">$img, data</span>) </span>{
+    <span class="built_in">console</span>.log(<span class="string">'Success!'</span>, $img, data);
+  }
+});
+</code></pre>
+<p>Note, this callback is called <em>once</em> for each image.</p>
+<h2 id="Caveats"><a href="#Caveats" class="headerlink" title="Caveats"></a>Caveats</h2><p>This plugin utlizes the <code>&lt;canvas&gt;</code> element and the <code>ImageData</code> object, and due to cross-site security limitations, the script will fail if one tries to extract the colors from an image not hosted on the current domain, <em>unless</em> the image allows for <a href="http://en.wikipedia.org/wiki/Cross-origin_resource_sharing">Cross Origin Resource Sharing</a>.</p>
+<p><strong>Enabling CORS on S3</strong></p>
+<p>To enable CORS for images hosted on S3 buckets, follow the Amazon guide <a href="http://docs.aws.amazon.com/AmazonS3/latest/UG/EditingBucketPermissions.html">here</a>; adding the following to the bucket’s CORS configuration:</p>
+<pre><code class="xml"><span class="tag">&lt;<span class="name">CORSRule</span>&gt;</span>
+ <span class="tag">&lt;<span class="name">AllowedOrigin</span>&gt;</span>*<span class="tag">&lt;/<span class="name">AllowedOrigin</span>&gt;</span>
+ <span class="tag">&lt;<span class="name">AllowedMethod</span>&gt;</span>GET<span class="tag">&lt;/<span class="name">AllowedMethod</span>&gt;</span>
+<span class="tag">&lt;/<span class="name">CORSRule</span>&gt;</span>
+</code></pre>
+<p>For all images, you can optionally also include a cross-origin attribute in your image. This is not absolutely necessary since the <code>anonymous</code> origin is set in the Javascript code, but kudos to you for being a super-developer.</p>
+<pre><code class="html"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"/image.jpg"</span> <span class="attr">data-adaptive-background</span> <span class="attr">cross-origin</span>=<span class="string">"anonymous"</span>/&gt;</span>
+</code></pre>
+<h2 id="Credit"><a href="#Credit" class="headerlink" title="Credit"></a>Credit</h2><p>This plugin is built on top of a script called <a href="https://github.com/briangonzalez/rgbaster.js">RGBaster</a>.</p>
+<h2 id="Author"><a href="#Author" class="headerlink" title="Author"></a>Author</h2><table>
+<thead>
+<tr>
+<th><img src="http://twitter.com/brianmgonzalez" alt="twitter/brianmgonzalez](http://gravatar.com/avatar/f6363fe1d9aadb1c3f07ba7867f0e854?s=70" title="Follow @brianmgonzalez on Twitter"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://briangonzalez.org">Brian Gonzalez</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="License"><a href="#License" class="headerlink" title="License"></a>License</h2><p>MIT, yo.</p>

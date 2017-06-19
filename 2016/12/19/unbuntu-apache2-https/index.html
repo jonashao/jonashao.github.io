@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="theme-color" content= #93b658 >
+    <title>个人网站HTTPS简易指南 | Jonas' </title>
+
+    
+        <meta name="keywords" content=",,,,"/>
+        
+
+    
+    <meta name="description" content="最近苹果IOS App强制使用Https, 又有之前著名的也是唯一的免费SSL服务商 starSSL与国内沃通的丑闻，紧随其后腾讯云、阿里云都推出了免费的域名型DV SSL证书。Https频繁进入人们的舆论中，许多个人站长也开始着手为自己的网址配备https的前缀。"/>
+
+    
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v="/>
+    
+
+    
+
+    
+
+    
+        <link rel="stylesheet" href="/lib/social-share.js/dist/css/share.min.css">
+    
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/materialize/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="/lib/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/css/post/atom-one-light.css">
+    <link rel="stylesheet" href="/css/pteris.css">
+
+
+    
+        <link rel="stylesheet" href="/css/post.css">
+    
+
+    
+        <link rel="stylesheet" href="/lib/lightgallery.js/dist/css/lightgallery.min.css">
+    
+
+    
+</head>
+
+<body>
+
+<header>
+    
+        <div class="header-fixed">
+    <nav class="white lime-text lighten-1 " role="navigation">
+        <div class="nav-wrapper container">
+            <div id="logo-container">
+                <a href="/">
+                    
+                    <span class="brand-logo">Jonas'</span>
+                </a>
+            </div>
+
+            <ul class="right hide-on-med-and-down">
+                
+                    <li><a href="/">Home</a></li>
+                
+                    <li><a href="/archives">Archives</a></li>
+                
+                    <li><a href="https://github.com/jonashao/">Github</a></li>
+                
+                    <li><a href="https://www.linkedin.com/in/haojunnan/">Linkedin</a></li>
+                
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                <i class="fa fa-bars green-text"></i></a>
+        </div>
+    </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+    
+        <li><a href="/">Home</a></li>
+    
+        <li><a href="/archives">Archives</a></li>
+    
+        <li><a href="https://github.com/jonashao/">Github</a></li>
+    
+        <li><a href="https://www.linkedin.com/in/haojunnan/">Linkedin</a></li>
+    
+</ul>
+
+
+
+    
+</header>
+
+<main>
+    
+
+    <div id="post">
+        <div class="container">
+            <div id="post-header" class="center">
+                <h1 class="center">个人网站HTTPS简易指南</h1>
+                <span class="post-date center">
+                    <i class="fa fa-calendar"></i>
+                    <time datetime="2016-12-19T15:00:55.000Z">
+                        2016-12-19
+                    </time>
+                </span>
+
+                
+
+                
+                    <div class="post-gallery">
+                        <div id="lightgallery">
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            <article>
+                <div class="content">
+                    
+    <p>最近苹果IOS App强制使用Https, 又有之前著名的也是唯一的免费SSL服务商 starSSL与<br>国内沃通的丑闻，紧随其后腾讯云、阿里云都推出了免费的域名型DV SSL证书。Https频繁进入人们的舆论中，许多个人站长也开始着手为自己的网址配备https的前缀。<br><a id="more"></a></p>
+<p>这篇文章用将介绍如何在 <code>Ubuntu</code>上， 为<code>Apache2</code>搭建的服务器 设置 <code>SSL</code>。</p>
+<p>做法很简单，只有三步。<br>第一步，申请一个证书，<br>第二步，将证书放在你的服务器上，<br>第三步，配置证书位置。</p>
+<h3 id="第一步，申请一个证书"><a href="#第一步，申请一个证书" class="headerlink" title="第一步，申请一个证书"></a>第一步，申请一个证书</h3><p>去腾讯云或者阿里云免费申请一个DV SSL证书， 一般十分钟之内就会审批通过。</p>
+<p>带你去申请：<a href="https://www.qcloud.com/product/ssl" target="_blank" rel="external">SSL证书-腾讯云</a>，<br><a href="https://www.aliyun.com/product/cas" target="_blank" rel="external">云盾证书服务-阿里云</a>。</p>
+<p>博主用腾讯云申请了，得到一个zip压缩包。<br><img src="/images/https/证书.png" alt="certificate"></p>
+<h3 id="第二步，-将证书放在你的服务器上"><a href="#第二步，-将证书放在你的服务器上" class="headerlink" title="第二步， 将证书放在你的服务器上"></a>第二步， 将证书放在你的服务器上</h3><p>用ftp或者任何你习惯的方式，将解压到的3个文件发送到你的ubuntu上。</p>
+<h3 id="第三步，配置证书位置"><a href="#第三步，配置证书位置" class="headerlink" title="第三步，配置证书位置"></a>第三步，配置证书位置</h3><p>首先确保ssl模块已经加载进apache:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo a2enmod ssl</div></pre></td></tr></table></figure>
+<p>然后修改你的虚拟主机文件，配置第二步中的3个文件的位置，<br>配置文件通常在<code>/etc/apache2/sites-enable</code>下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;VirtualHost *:443&gt;</div><div class="line">	ServerAdmin webmaster@localhost</div><div class="line">	DocumentRoot /var/www/html</div><div class="line">	ServerName yoursite.com</div><div class="line">	SSLEngine on</div><div class="line">	SSLCertificateFile /usr/local/ssl/crt/www.yoursite.com.crt</div><div class="line">	SSLCertificateKeyFile /usr/local/ssl/www.yoursite.com.key</div><div class="line">	SSLCACertificateFile /usr/local/ssl/root_bundle.crt</div><div class="line">&lt;/VirtualHost&gt;</div></pre></td></tr></table></figure>
+<p>最后，重启apache服务器，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service apache2 restart</div></pre></td></tr></table></figure></p>
+<p><code>https://www.yoursite.com</code>应该已经可以访问了。</p>
+<p>由于DV SSL证书只能设置二级域名，而你想让你的一级域名也可以用https,<br>你可以将所有<code>yoursite.com</code>的访问重定向到<code>www.yoursite.com</code>上。</p>
+<p>做法如下：<br>编辑配置文件<code>apache2.conf</code>， 通常在<code>/etc/apache2/apache2.conf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#打开重定向</div><div class="line">RewriteEngine on  </div><div class="line">#匹配条件，NC表示忽略大小写</div><div class="line">RewriteCond %&#123;HTTP_HOST&#125; ^https://yoursite.com [NC] </div><div class="line">#跳转到www，L表示停止重定向</div><div class="line">RewriteRule ^(.*) https://www.yoursite.com/ [L]</div></pre></td></tr></table></figure></p>
+
+
+                </div>
+            </article>
+
+
+            <div class="post-tags center">
+                
+                    <span class="post-tag chip">
+                        <a href="/tags/https/">https</a>
+                   </span>
+                
+                    <span class="post-tag chip">
+                        <a href="/tags/ssl/">ssl</a>
+                   </span>
+                
+                    <span class="post-tag chip">
+                        <a href="/tags/ubuntu/">ubuntu</a>
+                   </span>
+                
+                    <span class="post-tag chip">
+                        <a href="/tags/apache2/">apache2</a>
+                   </span>
+                
+            </div>
+
+
+            <div class="social-share" data-mobile-sites="weibo,qq,qzone,facebook,twitter">
+                <span id="share-to">Share to</span>
+            </div>
+
+            <div class="post-footer">
+                
+                    <a class="left" href="/2017/04/17/jersey-gradle/" rel="prev" title="快速用Gradle搭建Jersey">
+                        <i class="fa fa-arrow-circle-left fa-3x" aria-hidden="true"></i>
+                        <span>  快速用Gradle搭建Jersey</span>
+                    </a>
+                
+                
+                    <a class="right" href="/2016/11/28/react-es6-notes/" rel="next" title="React ES6 Notes">
+                        React ES6 Notes<i
+                                class="fa fa-arrow-circle-right fa-3x "></i>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+<footer>
+    
+        <footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            <div>© 2017 Copyright Jonas Hao
+                <span class="right">
+                powered by
+                <a href="http://hexo.io">hexo</a>.
+                theme:
+                <a href="https://github.com/jonashao/hexo-theme-pteris">pteris</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="filing">
+            <a href="//www.miitbeian.gov.cn">粤ICP备15089702号-1</a>
+        </div>
+    
+</footer>
+
+    
+</footer>
+
+
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+<script src="/lib/materialize/dist/js/materialize.min.js"></script>
+<script src="/lib/headroom.js/dist/headroom.min.js"></script>
+<script src="/lib/headroom.js/dist/jQuery.headroom.min.js"></script>
+
+
+
+    <script src="/lib/social-share.js/dist/js/share.min.js"></script>
+
+
+
+<script src="/js/pteris.js"></script>
+
+
+    <script src="/lib/lightgallery.js/dist/js/lightgallery.min.js"></script>
+
+
+
+
+
+    <script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+
+
+
+</body>
+</html>

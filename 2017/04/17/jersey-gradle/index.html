@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="">
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta name="theme-color" content= #93b658 >
+    <title>快速用Gradle搭建Jersey | Jonas' </title>
+
+    
+        <meta name="keywords" content=",,,,"/>
+        
+
+    
+    <meta name="description" content="源码：jersey-gradle-example
+本博客参考了Jersey官方的Jersey 2 maven archetypes创建的项目。"/>
+
+    
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v="/>
+    
+
+    
+
+    
+
+    
+        <link rel="stylesheet" href="/lib/social-share.js/dist/css/share.min.css">
+    
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/lib/materialize/dist/css/materialize.min.css">
+    <link rel="stylesheet" href="/lib/animate.css/animate.min.css">
+    <link rel="stylesheet" href="/css/post/atom-one-light.css">
+    <link rel="stylesheet" href="/css/pteris.css">
+
+
+    
+        <link rel="stylesheet" href="/css/post.css">
+    
+
+    
+        <link rel="stylesheet" href="/lib/lightgallery.js/dist/css/lightgallery.min.css">
+    
+
+    
+</head>
+
+<body>
+
+<header>
+    
+        <div class="header-fixed">
+    <nav class="white lime-text lighten-1 " role="navigation">
+        <div class="nav-wrapper container">
+            <div id="logo-container">
+                <a href="/">
+                    
+                    <span class="brand-logo">Jonas'</span>
+                </a>
+            </div>
+
+            <ul class="right hide-on-med-and-down">
+                
+                    <li><a href="/">Home</a></li>
+                
+                    <li><a href="/archives">Archives</a></li>
+                
+                    <li><a href="https://github.com/jonashao/">Github</a></li>
+                
+                    <li><a href="https://www.linkedin.com/in/haojunnan/">Linkedin</a></li>
+                
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse">
+                <i class="fa fa-bars green-text"></i></a>
+        </div>
+    </nav>
+</div>
+
+<ul id="nav-mobile" class="side-nav">
+    
+        <li><a href="/">Home</a></li>
+    
+        <li><a href="/archives">Archives</a></li>
+    
+        <li><a href="https://github.com/jonashao/">Github</a></li>
+    
+        <li><a href="https://www.linkedin.com/in/haojunnan/">Linkedin</a></li>
+    
+</ul>
+
+
+
+    
+</header>
+
+<main>
+    
+
+    <div id="post">
+        <div class="container">
+            <div id="post-header" class="center">
+                <h1 class="center">快速用Gradle搭建Jersey</h1>
+                <span class="post-date center">
+                    <i class="fa fa-calendar"></i>
+                    <time datetime="2017-04-17T15:49:00.000Z">
+                        2017-04-17
+                    </time>
+                </span>
+
+                
+
+                
+                    <div class="post-gallery">
+                        <div id="lightgallery">
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            <article>
+                <div class="content">
+                    
+    <p>源码：<a href="https://github.com/jonashao/jersey-gradle-example" target="_blank" rel="external">jersey-gradle-example</a></p>
+<p>本博客参考了Jersey官方的<a href="https://jersey.java.net/download.html" target="_blank" rel="external">Jersey 2 maven archetypes</a>创建的项目。</p>
+<a id="more"></a>
+<p>工具：</p>
+<ul>
+<li>IDE: Intellij Idea</li>
+<li>容器: Jetty(也可以使用Tomcat等其他容器)</li>
+</ul>
+<h1 id="1-创建Gradle项目"><a href="#1-创建Gradle项目" class="headerlink" title="1. 创建Gradle项目"></a>1. 创建Gradle项目</h1><p>请参考 <a href="http://www.jianshu.com/p/c0fc6a91d3e7" target="_blank" rel="external">IntelliJ Idea 创建Gradle项目</a>.</p>
+<h1 id="2-配置build-gradle"><a href="#2-配置build-gradle" class="headerlink" title="2. 配置build.gradle"></a>2. 配置build.gradle</h1><p>添加Jersey 2依赖。</p>
+<p>值得注意：Jersey团队从sun到了glassfish， 所以Jersey 2.x的包名从<code>com.sun.jersey</code>变成了<code>org.glassfish.jersey</code>。</p>
+<p>最终build.gradle文件是这样：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">group</span> <span class="string">'com.junnanhao'</span></div><div class="line">version <span class="string">'1.0-SNAPSHOT'</span></div><div class="line"></div><div class="line">apply plugin: <span class="string">'java'</span></div><div class="line">apply plugin: <span class="string">'war'</span></div><div class="line"></div><div class="line"><span class="keyword">sourceCompatibility</span> = <span class="number">1.8</span></div><div class="line"></div><div class="line"><span class="keyword">repositories</span> &#123;</div><div class="line">    mavenCentral()</div><div class="line">&#125;</div><div class="line"></div><div class="line">ext&#123;</div><div class="line">    jerseyVersion = <span class="string">'2.25.1'</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">dependencies</span> &#123;</div><div class="line">    testCompile <span class="keyword">group</span>: <span class="string">'junit'</span>, name: <span class="string">'junit'</span>, version: <span class="string">'4.11'</span></div><div class="line">    testCompile <span class="keyword">group</span>: <span class="string">'junit'</span>, name: <span class="string">'junit'</span>, version: <span class="string">'4.12'</span></div><div class="line"></div><div class="line">    <span class="keyword">compile</span> <span class="string">'javax.ws.rs:javax.ws.rs-api:2.0.1'</span></div><div class="line">    <span class="keyword">compile</span> <span class="string">"org.glassfish.jersey.core:jersey-server:$jerseyVersion"</span></div><div class="line">    <span class="keyword">compile</span> <span class="string">"org.glassfish.jersey:jersey-bom:$jerseyVersion"</span></div><div class="line">    <span class="keyword">compile</span> <span class="string">"org.glassfish.jersey.containers:jersey-container-servlet-core:$jerseyVersion"</span></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>写稿日最新的jerseyVersion为<code>2.25.1</code>，建议在<a href="https://jersey.java.net/download.html" target="_blank" rel="external">Jersey官网</a>查询最新版本。</p>
+<h1 id="3-写一个简单的Server"><a href="#3-写一个简单的Server" class="headerlink" title="3. 写一个简单的Server"></a>3. 写一个简单的Server</h1><h2 id="3-1-创建Resource"><a href="#3-1-创建Resource" class="headerlink" title="3.1. 创建Resource"></a>3.1. 创建Resource</h2><p>在src/main/java 下创建包<code>com.junnanhao</code>（你的groupId），并在包内创建<code>MyResource.java</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.junnanhao;</div><div class="line"></div><div class="line"><span class="keyword">import</span> javax.ws.rs.GET;</div><div class="line"><span class="keyword">import</span> javax.ws.rs.Path;</div><div class="line"><span class="keyword">import</span> javax.ws.rs.Produces;</div><div class="line"><span class="keyword">import</span> javax.ws.rs.core.MediaType;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Root resource (exposed at "myresource" path)</div><div class="line"> */</div><div class="line"><span class="meta">@Path</span>(<span class="string">"myresource"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyResource</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Method handling HTTP GET requests. The returned object will be sent</div><div class="line">     * to the client as "text/plain" media type.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@return</span> String that will be returned as a text/plain response.</div><div class="line">     */</div><div class="line">    <span class="meta">@GET</span></div><div class="line">    <span class="meta">@Produces</span>(MediaType.TEXT_PLAIN)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getIt</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"Got it!"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="3-2-创建web-xml"><a href="#3-2-创建web-xml" class="headerlink" title="3.2. 创建web.xml"></a>3.2. 创建web.xml</h2><p>在src/main/webapp下创建WEB-INF/web.xml。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="comment">&lt;!-- This web.xml file is not required when using Servlet 3.0 container,</span></div><div class="line">     see implementation details http://jersey.java.net/nonav/documentation/latest/jax-rs.html --&gt;</div><div class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">version</span>=<span class="string">"2.5"</span> <span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/javaee"</span></span></div><div class="line">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>Jersey Web Application<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.glassfish.jersey.servlet.ServletContainer<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>jersey.config.server.provider.packages<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>com.junnanhao<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>Jersey Web Application<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/webapi/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="3-3-修改index-jsp"><a href="#3-3-修改index-jsp" class="headerlink" title="3.3 修改index.jsp"></a>3.3 修改index.jsp</h2><p>index.jsp作为网页的home page, 是项目各个模块的入口。</p>
+<p>直接用下面的代码覆盖index.jsp：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Jersey RESTful Web Application!<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"webapi/myresource"</span>&gt;</span>Jersey resource<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Visit <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://jersey.java.net"</span>&gt;</span>Project Jersey website<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    for more information on Jersey!</div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="4-配置Jetty"><a href="#4-配置Jetty" class="headerlink" title="4. 配置Jetty"></a>4. 配置Jetty</h1><p>首先请确保IntelliJ Idea已启用Jetty plugin.</p>
+<p><code>Ctrl + Alt + S</code> 打开Settings。 在左侧菜单选择Plugins, 搜索Jetty, 确保复选框已启用。</p>
+<p>如果第一次启用，请重启IDEA。</p>
+<h2 id="4-1-点击Idea右上角的小下拉三角形Edit-Configurations"><a href="#4-1-点击Idea右上角的小下拉三角形Edit-Configurations" class="headerlink" title="4.1. 点击Idea右上角的小下拉三角形Edit Configurations"></a>4.1. 点击Idea右上角的小下拉三角形Edit Configurations</h2><p><img src="/images/jersey-gradle/2.Edit-Server-Configurations.png" alt="edit configurations"></p>
+<h2 id="4-2-配置默认Jetty-Server"><a href="#4-2-配置默认Jetty-Server" class="headerlink" title="4.2. 配置默认Jetty Server"></a>4.2. 配置默认Jetty Server</h2><p>选择Run/Debug Configurations面板左侧的<code>Defaults/Jetty Server/Local</code></p>
+<p>点击<code>Configure</code>配置Jetty home。</p>
+<p><a href="http://www.eclipse.org/jetty/download.html" target="_blank" rel="external">Jetty 下载地址</a></p>
+<p><img src="/images/jersey-gradle/4.Configure-Jetty2.png" alt="download-jetty"></p>
+<p>Jetty Home 即下载解压后的目录。</p>
+<h2 id="4-2-点击绿色-号按钮，添加运行配置。"><a href="#4-2-点击绿色-号按钮，添加运行配置。" class="headerlink" title="4.2. 点击绿色+号按钮，添加运行配置。"></a>4.2. 点击绿色<code>+</code>号按钮，添加运行配置。</h2><p>选择Jetty Server/Local</p>
+<p><img src="/images/jersey-gradle/3.Add-Run-Configration.png" alt="add configuration"></p>
+<h2 id="4-3-配置Jetty-Server"><a href="#4-3-配置Jetty-Server" class="headerlink" title="4.3. 配置Jetty Server"></a>4.3. 配置Jetty Server</h2><p><img src="/images/jersey-gradle/4.Configure-Jetty.png" alt="configure Jetty">这是黄色框为须要配置的地方。</p>
+<p>因为还没有配置artifacts，Idea发出警报， 点击Fix按钮。</p>
+<p>选择 Gradle:com.junnanhao:project-name-1.0-SNAPSHOT.war(exploded)</p>
+<p><img src="/images/jersey-gradle/4.Configure-Jetty3.png" alt="artifacts"></p>
+<h1 id="5-运行"><a href="#5-运行" class="headerlink" title="5. 运行"></a>5. 运行</h1><p>点击右上角的运行三角形。</p>
+<p><img src="/images/jersey-gradle/5.run.png" alt="run"></p>
+<p>跳出下面网页表示配置成功了。</p>
+<p><img src="/images/jersey-gradle/5.run2.png" alt="run success"></p>
+<blockquote>
+<p>源码请见<a href="https://github.com/jonashao/jersey-gradle-example" target="_blank" rel="external">jersey-gradle-example</a></p>
+</blockquote>
+
+
+                </div>
+            </article>
+
+
+            <div class="post-tags center">
+                
+                    <span class="post-tag chip">
+                        <a href="/tags/gradle/">gradle</a>
+                   </span>
+                
+                    <span class="post-tag chip">
+                        <a href="/tags/jersey/">jersey</a>
+                   </span>
+                
+                    <span class="post-tag chip">
+                        <a href="/tags/jetty/">jetty</a>
+                   </span>
+                
+                    <span class="post-tag chip">
+                        <a href="/tags/intellij/">intellij</a>
+                   </span>
+                
+            </div>
+
+
+            <div class="social-share" data-mobile-sites="weibo,qq,qzone,facebook,twitter">
+                <span id="share-to">Share to</span>
+            </div>
+
+            <div class="post-footer">
+                
+                
+                    <a class="right" href="/2016/12/19/unbuntu-apache2-https/" rel="next" title="个人网站HTTPS简易指南">
+                        个人网站HTTPS简易指南<i
+                                class="fa fa-arrow-circle-right fa-3x "></i>
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+<footer>
+    
+        <footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            <div>© 2017 Copyright Jonas Hao
+                <span class="right">
+                powered by
+                <a href="http://hexo.io">hexo</a>.
+                theme:
+                <a href="https://github.com/jonashao/hexo-theme-pteris">pteris</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="filing">
+            <a href="//www.miitbeian.gov.cn">粤ICP备15089702号-1</a>
+        </div>
+    
+</footer>
+
+    
+</footer>
+
+
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+<script src="/lib/materialize/dist/js/materialize.min.js"></script>
+<script src="/lib/headroom.js/dist/headroom.min.js"></script>
+<script src="/lib/headroom.js/dist/jQuery.headroom.min.js"></script>
+
+
+
+    <script src="/lib/social-share.js/dist/js/share.min.js"></script>
+
+
+
+<script src="/js/pteris.js"></script>
+
+
+    <script src="/lib/lightgallery.js/dist/js/lightgallery.min.js"></script>
+
+
+
+
+
+    <script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+
+
+
+</body>
+</html>
